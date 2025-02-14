@@ -7,7 +7,7 @@ function adicionarNota() {
         return;
     }
     notaText = notaText.replace(',', '.');
-    const notaFloat = parseFloat(notaText).toFixed(2);
+    const notaFloat = parseFloat(Number(notaText).toFixed(2));
     if (!isNaN(notaFloat) && notaFloat >= 0 && notaFloat <= 10) {
         notas.push(notaFloat);
         const telaNotas = document.getElementById('tela-notas');
@@ -20,4 +20,18 @@ function adicionarNota() {
     }
 }
 
+function calcularMedia() {
+    if (notas.length === 0) {
+        alert('Nenhuma nota foi adicionada.');
+        return;
+    }
+    let soma = 0;
+    notas.forEach(nota => {
+        soma += nota;
+    });
+    const media = (soma / notas.length).toFixed(2);
+    document.getElementById('media').textContent = media;
+}
+
 document.getElementById('adicionar').addEventListener('click', adicionarNota);
+document.getElementById('calcular').addEventListener('click', calcularMedia);
